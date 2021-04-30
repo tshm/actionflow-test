@@ -1,6 +1,6 @@
 on:
   youtube:
-    playlist_id: ${{secrets.PLAYLISTID}}
+    playlist_id: ${{ secrets.PLAYLISTID }}
     config:
       shouldDeduplicate: true
 jobs:
@@ -17,3 +17,15 @@ jobs:
           echo title: $title
           echo description: $description
           echo link: $link
+      - name: post to firebase
+        uses: actionsflow/axios@v1
+        with:
+          url: ${{secrets.FBURL}}?auth${{secrets.FBAUTH}}
+          method: 'POST'
+          content-type: 'application/json'
+          timeout: 10000
+          data: |
+            {
+              "url": "<<<${{on.youtube.outputs.link}}>>>",
+              "title": "<<<${{on.youtube.outputs.title}}>>>"
+            }
