@@ -1,6 +1,6 @@
 on:
   youtube:
-    playlist_id: ${{env.PLAYLISTID}}
+    playlist_id: ${{secrets.PLAYLISTID}}
     config:
       shouldDeduplicate: true
 jobs:
