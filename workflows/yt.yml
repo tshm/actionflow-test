@@ -20,12 +20,13 @@ jobs:
       - name: post to firebase
         uses: actionsflow/axios@v1
         with:
-          url: ${{secrets.FBURL}}?auth${{secrets.FBAUTH}}
+          url: ${{secrets.URL}}
           method: 'POST'
           content-type: 'application/json'
           timeout: 10000
           data: |
             {
               "url": "<<<${{on.youtube.outputs.link}}>>>",
-              "title": "<<<${{on.youtube.outputs.title}}>>>"
+              "title": "<<<${{on.youtube.outputs.title}}>>>",
+              "mark": "actionsflow"
             }
